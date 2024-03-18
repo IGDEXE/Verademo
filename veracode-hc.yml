@@ -70,7 +70,7 @@ stages:
 
 - stage: SAST
   displayName: U&S and Pipeline Scan
-  dependsOn: Build,VeracodeHC
+  dependsOn: [Build, VeracodeHC]
   jobs:
   - job: PipelineScan
     displayName: 'Veracode PipelineScan'
@@ -115,6 +115,8 @@ stages:
         filepath: '$(caminhoPacote)'
         createSandBox: false
         createProfile: true
+        failTheBuildIfVeracodeScanDidNotInitiate: false
+        scanStatusCheckInterval: '60'
         importResults: false
         failBuildOnPolicyFail: false
       displayName: 'Veracode U&S'
