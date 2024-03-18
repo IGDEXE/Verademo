@@ -59,7 +59,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          $statusVeracode = http GET "https://api.status.veracode.com/status" | ConvertFrom-Json
+          $statusVeracode = curl "https://api.status.veracode.com/status" | ConvertFrom-Json
           $appServiceStatus = $statusVeracode.application_service.status
 
           if ($appServiceStatus -eq "UP") {
