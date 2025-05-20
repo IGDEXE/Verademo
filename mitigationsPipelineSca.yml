@@ -30,6 +30,7 @@ steps:
     VeracodeAPIID: '$(vid)'
     VeracodeAPIsecret: '$(vkey)'
     fileToScan: './target/verademo.war'
+    policyName: 'Veracode Recommended Very High'
     breakPipeline: false
   condition:
       succeededOrFailed()
