@@ -33,7 +33,8 @@ stages:
       continueOnError: true
 
     - script: |
-        ./veracode scan --type directory --source ./ --format table
+        CURRENT_DIR_NAME=$(basename "$PWD")
+        ./veracode scan --type directory --source "$CURRENT_DIR" --format table
       displayName: 'Veracode IaC'
       continueOnError: true
 
