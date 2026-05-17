@@ -33,8 +33,21 @@ stages:
       continueOnError: true
 
     - script: |
+        ORIGINAL_DIR=$(pwd)
+        PARENT_DIR=$(dirname "$ORIGINAL_DIR")
+        ORIGINAL_NAME=$(basename "$ORIGINAL_DIR")
+        PIPELINE_DIR="$(Build.DefinitionName)"
+
+        cd "$PARENT_DIR"
+        mv "$ORIGINAL_NAME" "$PIPELINE_DIR"
+        cd "$PIPELINE_DIR"
         echo "pasta:$(pwd)"
+
         ./veracode scan --type directory --source "$(pwd)" --format table
+
+        cd "$PARENT_DIR"
+        mv "$PIPELINE_DIR" "$ORIGINAL_NAME"
+        cd "$ORIGINAL_DIR"
       displayName: 'Veracode IaC'
       continueOnError: true
 
